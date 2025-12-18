@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token::{self, Token, TokenAccount, Transfer, Mint};
-use anchor_spl::associated_token::AssociatedToken;
+use anchor_spl::token::{self, Token, TokenAccount, Transfer};
 
 declare_id!("8g37Z8wZR9xMaHQRP8W8FzWqAj1A8VRt2c4t6LnBqAyb");
 
@@ -134,32 +133,40 @@ pub mod ai_marketplace {
             }
             PaymentToken::SplToken => {
                 // Transfer to creator (SPL Token)
-                let creator_transfer = Transfer {
-                    from: ctx.accounts.user_token_account.to_account_info(),
-                    to: ctx.accounts.creator_token_account.to_account_info(),
-                    authority: ctx.accounts.user.to_account_info(),
-                };
-                token::transfer(
-                    CpiContext::new(
-                        ctx.accounts.token_program.to_account_info(),
-                        creator_transfer,
-                    ),
-                    creator_amount,
-                )?;
+                if let (Some(user_token), Some(creator_token), Some(token_prog)) = (
+                    &ctx.accounts.user_token_account,
+                    &ctx.accounts.creator_token_account,
+                    &ctx.accounts.token_program,
+                ) {
+                    let creator_transfer = Transfer {
+                        from: user_token.to_account_info(),
+                        to: creator_token.to_account_info(),
+                        authority: ctx.accounts.user.to_account_info(),
+                    };
+                    token::transfer(
+                        CpiContext::new(
+                            token_prog.to_account_info(),
+                            creator_transfer,
+                        ),
+                        creator_amount,
+                    )?;
 
-                // Transfer protocol fee (SPL Token)
-                let protocol_transfer = Transfer {
-                    from: ctx.accounts.user_token_account.to_account_info(),
-                    to: ctx.accounts.treasury_token_account.to_account_info(),
-                    authority: ctx.accounts.user.to_account_info(),
-                };
-                token::transfer(
-                    CpiContext::new(
-                        ctx.accounts.token_program.to_account_info(),
-                        protocol_transfer,
-                    ),
-                    protocol_fee,
-                )?;
+                    // Transfer protocol fee (SPL Token)
+                    if let Some(treasury_token) = &ctx.accounts.treasury_token_account {
+                        let protocol_transfer = Transfer {
+                            from: user_token.to_account_info(),
+                            to: treasury_token.to_account_info(),
+                            authority: ctx.accounts.user.to_account_info(),
+                        };
+                        token::transfer(
+                            CpiContext::new(
+                                token_prog.to_account_info(),
+                                protocol_transfer,
+                            ),
+                            protocol_fee,
+                        )?;
+                    }
+                }
             }
         }
 
@@ -191,7 +198,6 @@ pub mod ai_marketplace {
         inference_hash: String,
     ) -> Result<()> {
         let access = &mut ctx.accounts.access;
-        let model = &mut ctx.accounts.model;
 
         // Verify access is valid
         require!(access.is_active, ErrorCode::AccessExpired);
@@ -202,17 +208,21 @@ pub mod ai_marketplace {
             );
         }
 
+        // Get keys before mutable borrows
+        let user_key = ctx.accounts.user.key();
+        let model_key = ctx.accounts.model.key();
+
         // Record inference
         let usage = &mut ctx.accounts.usage;
-        usage.user = ctx.accounts.user.key();
-        usage.model = ctx.accounts.model.key();
+        usage.user = user_key;
+        usage.model = model_key;
         usage.inference_hash = inference_hash;
         usage.timestamp = Clock::get()?.unix_timestamp;
         usage.bump = ctx.bumps.usage;
 
         // Update counters
         access.inference_count += 1;
-        model.total_inferences += 1;
+        ctx.accounts.model.total_inferences += 1;
 
         msg!("Inference recorded for model");
         Ok(())
@@ -269,10 +279,9 @@ pub mod ai_marketplace {
 
     /// Withdraw creator earnings
     pub fn withdraw_earnings(ctx: Context<WithdrawEarnings>, amount: u64) -> Result<()> {
-        let model = &ctx.accounts.model;
-        
         // Note: In production, track earnings in a separate account
         // This is a simplified version
+        let _ = &ctx.accounts.model;
         
         msg!("Withdrawal of {} requested", amount);
         Ok(())
