@@ -23,7 +23,8 @@
     "clsx": "^2.0.0",
     "lucide-react": "^0.294.0",
     "tailwind-merge": "^2.1.0",
-    "zustand": "^4.4.7"
+    "zustand": "^4.4.7",
+    "immer": "^10.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
