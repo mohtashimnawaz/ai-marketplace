@@ -15,8 +15,11 @@ export default function LiveStatsBar() {
     activeUsers: 0,
     lastUpdate: new Date().toISOString(),
   });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     const fetchStats = async () => {
       try {
         const response = await fetch('/api/models');
@@ -27,7 +30,7 @@ export default function LiveStatsBar() {
           totalInferences: data.models?.reduce((sum: number, m: any) => 
             sum + (m.totalInferences || 0), 0
           ) || 0,
-          activeUsers: Math.floor(Math.random() * 50) + 10, // Simulated
+          activeUsers: Math.floor(Math.random() * 50) + 10,
           lastUpdate: new Date().toISOString(),
         });
       } catch (error) {
@@ -36,10 +39,14 @@ export default function LiveStatsBar() {
     };
 
     fetchStats();
-    const interval = setInterval(fetchStats, 15000); // Update every 15s
+    const interval = setInterval(fetchStats, 15000);
 
     return () => clearInterval(interval);
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4">
