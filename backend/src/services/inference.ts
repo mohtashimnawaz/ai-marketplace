@@ -45,10 +45,11 @@ export async function runInference(
     // Convert output tensors to JSON-serializable format
     const output: Record<string, any> = {};
     for (const [key, tensor] of Object.entries(results)) {
+      const typedTensor = tensor as ort.Tensor;
       output[key] = {
-        data: Array.from(tensor.data),
-        dims: tensor.dims,
-        type: tensor.type,
+        data: Array.from(typedTensor.data as Float32Array | Int32Array | Uint8Array),
+        dims: typedTensor.dims,
+        type: typedTensor.type,
       };
     }
 
