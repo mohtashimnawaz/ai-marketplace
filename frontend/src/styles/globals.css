@@ -6,6 +6,19 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  body {
+    font-family: var(--font-rajdhani), system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-orbitron), system-ui, -apple-system, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
 }
 
 @layer utilities {
@@ -21,6 +34,18 @@
   
   .animate-blob {
     animation: blob 7s infinite;
+  }
+  
+  .animate-glow {
+    animation: textGlow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-tracking {
+    animation: tracking 2s ease-in-out infinite;
+  }
+  
+  .animate-flicker {
+    animation: flicker 3s linear infinite;
   }
   
   .animation-delay-2000 {
@@ -68,5 +93,37 @@
   }
   66% {
     transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow: 0 0 10px rgba(34,211,238,0.5),
+                 0 0 20px rgba(34,211,238,0.3),
+                 0 0 30px rgba(34,211,238,0.2);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(34,211,238,0.8),
+                 0 0 30px rgba(34,211,238,0.5),
+                 0 0 40px rgba(34,211,238,0.3),
+                 0 0 50px rgba(34,211,238,0.2);
+  }
+}
+
+@keyframes tracking {
+  0%, 100% {
+    letter-spacing: 0.05em;
+  }
+  50% {
+    letter-spacing: 0.15em;
+  }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.4;
   }
 }

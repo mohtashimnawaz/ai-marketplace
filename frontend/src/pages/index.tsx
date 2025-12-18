@@ -81,11 +81,11 @@ export default function Home() {
                 <span className="text-gray-300">Live on Solana Devnet</span>
               </div>
               
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold">
-                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400 animate-gradient drop-shadow-[0_0_35px_rgba(34,211,238,0.4)]">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-wider">
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400 animate-gradient animate-glow">
                   Decentralized AI
                 </span>
-                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-lime-400 via-cyan-400 to-rose-400 drop-shadow-[0_0_35px_rgba(163,230,53,0.4)]">
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-lime-400 via-cyan-400 to-rose-400 animate-tracking">
                   Marketplace
                 </span>
               </h1>
@@ -134,8 +134,8 @@ export default function Home() {
           </div>
           <div className="container mx-auto max-w-7xl relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-rose-400">Why Choose Our Marketplace?</h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto">Experience the future of AI model trading with blockchain technology</p>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-rose-400 tracking-widest">Why Choose Our Marketplace?</h2>
+              <p className="text-lg text-gray-400 max-w-2xl mx-auto tracking-wide">Experience the future of AI model trading with blockchain technology</p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               <div className="group relative bg-slate-900/80 backdrop-blur-xl rounded-2xl p-8 shadow-2xl hover:shadow-[0_0_40px_rgba(34,211,238,0.15)] transition-all duration-300 hover:-translate-y-2 border border-slate-700 hover:border-cyan-500/50">
@@ -144,8 +144,8 @@ export default function Home() {
                   <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(34,211,238,0.4)]">
                     <Zap className="w-8 h-8 text-slate-900" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">Pay-Per-Use</h3>
-                  <p className="text-gray-400 leading-relaxed">
+                  <h3 className="text-2xl font-bold mb-3 text-white tracking-wide">Pay-Per-Use</h3>
+                  <p className="text-gray-400 leading-relaxed tracking-wide">
                     Run inferences without buying the entire model. Pay only for what you use with micro-transactions on Solana.
                   </p>
                 </div>
@@ -156,8 +156,8 @@ export default function Home() {
                   <div className="w-16 h-16 bg-gradient-to-br from-rose-500 to-rose-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(251,113,133,0.4)]">
                     <Download className="w-8 h-8 text-slate-900" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">Full Ownership</h3>
-                  <p className="text-gray-400 leading-relaxed">
+                  <h3 className="text-2xl font-bold mb-3 text-white tracking-wide">Full Ownership</h3>
+                  <p className="text-gray-400 leading-relaxed tracking-wide">
                     Purchase models outright with NFT-gated access control enforced on-chain. True digital ownership.
                   </p>
                 </div>
@@ -168,7 +168,7 @@ export default function Home() {
                   <div className="w-16 h-16 bg-gradient-to-br from-lime-500 to-lime-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(163,230,53,0.4)]">
                     <Sparkles className="w-8 h-8 text-slate-900" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">Instant Deployment</h3>
+                  <h3 className="text-2xl font-bold mb-3 text-white tracking-wide">Instant Deployment</h3>
                   <p className="text-gray-400 leading-relaxed">
                     Deploy models to edge compute nodes for fast, decentralized inference with low latency worldwide.
                   </p>
@@ -192,8 +192,8 @@ export default function Home() {
           <div className="container mx-auto max-w-7xl relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">Featured Models</h2>
-                <p className="text-gray-400">Discover the most popular AI models</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white tracking-widest">Featured Models</h2>
+                <p className="text-gray-400 tracking-wide">Discover the most popular AI models</p>
               </div>
               <Link href="/explore" className="group inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold">
                 View All Models
@@ -254,8 +254,8 @@ export default function Home() {
           </div>
           <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')] opacity-[0.03]"></div>
           <div className="container mx-auto max-w-4xl text-center relative z-10">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-rose-400 to-lime-400">Ready to Get Started?</h2>
-            <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-rose-400 to-lime-400 tracking-widest animate-glow">Ready to Get Started?</h2>
+            <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed tracking-wide">
               Join thousands of creators and users building the future of decentralized AI. Connect your wallet to begin.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
