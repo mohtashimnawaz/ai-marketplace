@@ -1,8 +1,13 @@
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { Sparkles, Menu, X } from 'lucide-react'
 import { useState } from 'react'
+
+const WalletMultiButton = dynamic(
+  async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+  { ssr: false }
+)
 
 const Navbar = () => {
   const { connected } = useWallet()
