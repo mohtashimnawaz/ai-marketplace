@@ -131,16 +131,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./node_modules/lucide-react/dist/esm/icons/wallet.js":
-/*!************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/wallet.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Wallet)\n/* harmony export */ });\n/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ \"./node_modules/lucide-react/dist/esm/createLucideIcon.js\");\n/**\n * @license lucide-react v0.294.0 - ISC\n *\n * This source code is licensed under the ISC license.\n * See the LICENSE file in the root directory of this source tree.\n */\n\n\n\nconst Wallet = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"Wallet\", [\n  [\"path\", { d: \"M21 12V7H5a2 2 0 0 1 0-4h14v4\", key: \"195gfw\" }],\n  [\"path\", { d: \"M3 5v14a2 2 0 0 0 2 2h16v-5\", key: \"195n9w\" }],\n  [\"path\", { d: \"M18 12a2 2 0 0 0 0 4h4v-4Z\", key: \"vllfpd\" }]\n]);\n\n\n//# sourceMappingURL=wallet.js.map\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvbHVjaWRlLXJlYWN0L2Rpc3QvZXNtL2ljb25zL3dhbGxldC5qcyIsIm1hcHBpbmdzIjoiOzs7OztBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFc0Q7O0FBRXRELGVBQWUsZ0VBQWdCO0FBQy9CLGFBQWEsbURBQW1EO0FBQ2hFLGFBQWEsaURBQWlEO0FBQzlELGFBQWEsZ0RBQWdEO0FBQzdEOztBQUU2QjtBQUM3QiIsInNvdXJjZXMiOlsid2VicGFjazovL2FpLW1hcmtldHBsYWNlLWZyb250ZW5kLy4vbm9kZV9tb2R1bGVzL2x1Y2lkZS1yZWFjdC9kaXN0L2VzbS9pY29ucy93YWxsZXQuanM/Yzg0MyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEBsaWNlbnNlIGx1Y2lkZS1yZWFjdCB2MC4yOTQuMCAtIElTQ1xuICpcbiAqIFRoaXMgc291cmNlIGNvZGUgaXMgbGljZW5zZWQgdW5kZXIgdGhlIElTQyBsaWNlbnNlLlxuICogU2VlIHRoZSBMSUNFTlNFIGZpbGUgaW4gdGhlIHJvb3QgZGlyZWN0b3J5IG9mIHRoaXMgc291cmNlIHRyZWUuXG4gKi9cblxuaW1wb3J0IGNyZWF0ZUx1Y2lkZUljb24gZnJvbSAnLi4vY3JlYXRlTHVjaWRlSWNvbi5qcyc7XG5cbmNvbnN0IFdhbGxldCA9IGNyZWF0ZUx1Y2lkZUljb24oXCJXYWxsZXRcIiwgW1xuICBbXCJwYXRoXCIsIHsgZDogXCJNMjEgMTJWN0g1YTIgMiAwIDAgMSAwLTRoMTR2NFwiLCBrZXk6IFwiMTk1Z2Z3XCIgfV0sXG4gIFtcInBhdGhcIiwgeyBkOiBcIk0zIDV2MTRhMiAyIDAgMCAwIDIgMmgxNnYtNVwiLCBrZXk6IFwiMTk1bjl3XCIgfV0sXG4gIFtcInBhdGhcIiwgeyBkOiBcIk0xOCAxMmEyIDIgMCAwIDAgMCA0aDR2LTRaXCIsIGtleTogXCJ2bGxmcGRcIiB9XVxuXSk7XG5cbmV4cG9ydCB7IFdhbGxldCBhcyBkZWZhdWx0IH07XG4vLyMgc291cmNlTWFwcGluZ1VSTD13YWxsZXQuanMubWFwXG4iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/lucide-react/dist/esm/icons/wallet.js\n");
-
-/***/ }),
-
 /***/ "./node_modules/lucide-react/dist/esm/icons/x.js":
 /*!*******************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/x.js ***!
