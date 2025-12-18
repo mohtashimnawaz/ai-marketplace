@@ -64,9 +64,9 @@ export default function LiveStatsBar() {
             <span className="opacity-90">{stats.activeUsers} active users</span>
           </div>
         </div>
-        <div className="text-xs opacity-75">
+        {/* <div className="text-xs opacity-75">
           Last updated: {new Date(stats.lastUpdate).toLocaleTimeString()}
-        </div>
+        </div> */}
       </div>
     </div>
   );

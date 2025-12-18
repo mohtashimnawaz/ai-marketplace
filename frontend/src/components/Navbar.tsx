@@ -39,21 +39,21 @@ const Navbar = () => {
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg' 
-        : 'bg-white dark:bg-gray-900 shadow-md'
+        ? 'bg-slate-900/90 backdrop-blur-xl shadow-lg shadow-cyan-500/10 border-b border-slate-700/50' 
+        : 'bg-slate-900/70 backdrop-blur-sm border-b border-slate-800/50'
     }`}>
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3 font-bold text-xl">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-rose-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative bg-gradient-to-r from-cyan-500 to-rose-500 p-2 rounded-lg">
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
             </div>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 group-hover:from-purple-600 group-hover:to-blue-600 transition-all">
-              AI Marketplace
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400 group-hover:from-rose-400 group-hover:to-cyan-400 transition-all font-orbitron tracking-wider">
+              DECE AI
             </span>
           </Link>
 
@@ -65,8 +65,8 @@ const Navbar = () => {
                 href={href}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
                   isActive(href)
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? 'bg-gradient-to-r from-cyan-500 to-rose-500 text-white shadow-lg shadow-cyan-500/25'
+                    : 'text-gray-300 hover:text-white hover:bg-slate-800/80 border border-transparent hover:border-slate-700'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -79,36 +79,36 @@ const Navbar = () => {
                 href={href}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
                   isActive(href)
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? 'bg-gradient-to-r from-cyan-500 to-rose-500 text-white shadow-lg shadow-cyan-500/25'
+                    : 'text-gray-300 hover:text-white hover:bg-slate-800/80 border border-transparent hover:border-slate-700'
                 }`}
               >
                 <Icon className="w-4 h-4" />
                 {label}
               </Link>
             ))}
-            <div className="ml-4 pl-4 border-l border-gray-200 dark:border-gray-700">
+            <div className="ml-4 pl-4 border-l border-slate-700">
               <WalletMultiButton />
             </div>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-slate-800 transition-colors border border-slate-700"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <X className="w-6 h-6 text-gray-300" />
             ) : (
-              <Menu className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <Menu className="w-6 h-6 text-gray-300" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 space-y-2 animate-fade-in border-t border-gray-200 dark:border-gray-700">
+          <div className="lg:hidden py-4 space-y-2 animate-fade-in border-t border-slate-700/50">
             {navLinks.map(({ href, label, icon: Icon }) => (
               <Link
                 key={href}
@@ -116,8 +116,8 @@ const Navbar = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${
                   isActive(href)
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? 'bg-gradient-to-r from-cyan-500 to-rose-500 text-white shadow-lg shadow-cyan-500/25'
+                    : 'text-gray-300 hover:text-white hover:bg-slate-800/80'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -126,7 +126,7 @@ const Navbar = () => {
             ))}
             {connected && (
               <>
-                <div className="h-px bg-gray-200 dark:bg-gray-700 my-2"></div>
+                <div className="h-px bg-slate-700 my-2"></div>
                 {connectedLinks.map(({ href, label, icon: Icon }) => (
                   <Link
                     key={href}
@@ -134,8 +134,8 @@ const Navbar = () => {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${
                       isActive(href)
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ? 'bg-gradient-to-r from-cyan-500 to-rose-500 text-white shadow-lg shadow-cyan-500/25'
+                        : 'text-gray-300 hover:text-white hover:bg-slate-800/80'
                     }`}
                   >
                     <Icon className="w-5 h-5" />
