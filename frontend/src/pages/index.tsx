@@ -61,8 +61,15 @@ export default function Home() {
       <main className="min-h-screen">
         <LiveStatsBar />
 
-        <section className="relative py-24 md:py-32 px-4 overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900">
-          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <section className="relative py-24 md:py-32 px-4 overflow-hidden">
+          {/* Animated Mesh Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-950 dark:via-purple-950 dark:to-gray-950"></div>
+          <div className="absolute inset-0">
+            <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-400 dark:bg-purple-700 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-70 animate-blob"></div>
+            <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-400 dark:bg-blue-700 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-400 dark:bg-pink-700 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+          </div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           <div className="container mx-auto max-w-7xl relative z-10">
             <div className="text-center space-y-6 md:space-y-8 animate-fade-in">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full text-sm font-medium shadow-lg">
@@ -119,8 +126,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24 px-4 bg-white dark:bg-gray-900">
-          <div className="container mx-auto max-w-7xl">
+        <section className="relative py-16 md:py-24 px-4 bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-10 right-10 w-96 h-96 bg-blue-200 dark:bg-blue-900/30 rounded-full filter blur-3xl"></div>
+            <div className="absolute bottom-10 left-10 w-96 h-96 bg-purple-200 dark:bg-purple-900/30 rounded-full filter blur-3xl"></div>
+          </div>
+          <div className="container mx-auto max-w-7xl relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Why Choose Our Marketplace?</h2>
               <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Experience the future of AI model trading with blockchain technology</p>
@@ -172,8 +183,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24 px-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-          <div className="container mx-auto max-w-7xl">
+        <section className="relative py-16 md:py-24 px-4 bg-gradient-to-b from-white via-blue-50/30 to-purple-50/30 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
+          <div className="absolute inset-0">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-300/20 to-purple-300/20 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full filter blur-3xl"></div>
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-pink-300/20 to-purple-300/20 dark:from-pink-900/20 dark:to-purple-900/20 rounded-full filter blur-3xl"></div>
+          </div>
+          <div className="container mx-auto max-w-7xl relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">Featured Models</h2>
@@ -229,10 +244,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24 px-4 bg-gradient-to-br from-purple-600 via-blue-600 to-pink-600 relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-pink-500 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '1s'}}></div>
+        <section className="py-16 md:py-24 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-blue-600 to-pink-600"></div>
+          <div className="absolute inset-0">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-pink-500 to-rose-500 rounded-full filter blur-3xl opacity-30 animate-blob"></div>
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-purple-500 to-violet-500 rounded-full filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+          </div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           <div className="container mx-auto max-w-4xl text-center relative z-10">
             <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">Ready to Get Started?</h2>
             <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
