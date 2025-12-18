@@ -5,3 +5,22 @@ target
 node_modules
 test-ledger
 .yarn
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Backend
+backend/models/*
+!backend/models/.gitkeep
+backend/.env
+
+# Frontend
+frontend/.next
+frontend/out
+frontend/.env.local
+
+# Arweave wallet
+*-wallet.json
+*.json.key
