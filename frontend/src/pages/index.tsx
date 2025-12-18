@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Sparkles, Download, Zap, Search, Upload } from 'lucide-react'
 import ModelCard from '@/components/ModelCard'
@@ -12,12 +12,23 @@ import { useUserStore } from '@/lib/store'
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('')
   const { trackSearch } = useUserStore()
+  const [showText, setShowText] = useState(false)
+  const textRef = useRef<HTMLSpanElement>(null)
   
   const [stats, setStats] = useState({
     totalModels: 0,
     totalInferences: 0,
     activeUsers: 0
   })
+  
+  useEffect(() => {
+    // Reset and trigger animation on mount
+    setShowText(false)
+    const timer = setTimeout(() => {
+      setShowText(true)
+    }, 50)
+    return () => clearTimeout(timer)
+  }, [])
   
   const { data: models, isLoading } = useQuery({
     queryKey: ['models'],
@@ -82,10 +93,23 @@ export default function Home() {
               </div>
               
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-wider">
-                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400 animate-gradient animate-glow">
-                  Decentralized AI
-                </span>
-                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-lime-400 via-cyan-400 to-rose-400 animate-tracking">
+                {showText && (
+                  <span 
+                    ref={textRef}
+                    className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400"
+                    style={{
+                      animation: 'revealText 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+                    }}
+                  >
+                    Decentralized AI
+                  </span>
+                )}
+                {!showText && (
+                  <span className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400 opacity-0">
+                    Decentralized AI
+                  </span>
+                )}
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-lime-400 via-cyan-400 to-rose-400">
                   Marketplace
                 </span>
               </h1>
