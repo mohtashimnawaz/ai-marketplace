@@ -67,7 +67,7 @@ export default function Creator() {
       const [marketplace] = getMarketplacePDA()
 
       // Get the next model ID from marketplace
-      const marketplaceAccount = await program.account.marketplace.fetch(marketplace)
+      const marketplaceAccount = await program.account.marketplace.fetch(marketplace) as any
       const modelId = marketplaceAccount.totalModels
 
       const [modelPDA] = getModelPDA(publicKey, modelId.toNumber())
@@ -106,10 +106,10 @@ export default function Creator() {
 
   if (!publicKey) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Connect Your Wallet</h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <h2 className="text-2xl font-bold mb-4 text-white">Connect Your Wallet</h2>
+          <p className="text-gray-400">
             Please connect your wallet to list models
           </p>
         </div>
@@ -120,23 +120,23 @@ export default function Creator() {
   return (
     <>
       <Head>
-        <title>List Your Model - AI Marketplace</title>
+        <title>List Your Model - Dece AI</title>
       </Head>
 
-      <div className="min-h-screen py-12 px-4">
+      <div className="min-h-screen bg-slate-950 py-12 px-4">
         <div className="container mx-auto max-w-2xl">
-          <h1 className="text-4xl font-bold mb-8">List Your AI Model</h1>
+          <h1 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-rose-400">List Your AI Model</h1>
 
-          <div className="card">
+          <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Model Name */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className="block text-sm font-medium mb-2 text-gray-300">
                   Model Name *
                 </label>
                 <input
                   type="text"
-                  className="input"
+                  className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
@@ -147,11 +147,11 @@ export default function Creator() {
 
               {/* Description */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className="block text-sm font-medium mb-2 text-gray-300">
                   Description *
                 </label>
                 <textarea
-                  className="input min-h-[100px]"
+                  className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all min-h-[100px]"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   required
@@ -162,10 +162,10 @@ export default function Creator() {
 
               {/* File Upload */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className="block text-sm font-medium mb-2 text-gray-300">
                   Model File *
                 </label>
-                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center">
+                <div className="border-2 border-dashed border-slate-700 rounded-lg p-8 text-center hover:border-cyan-500/50 transition-colors">
                   <input
                     type="file"
                     onChange={handleFileChange}
@@ -177,8 +177,8 @@ export default function Creator() {
                     htmlFor="model-file"
                     className="cursor-pointer flex flex-col items-center"
                   >
-                    <Upload className="w-12 h-12 text-gray-400 mb-4" />
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <Upload className="w-12 h-12 text-cyan-400 mb-4" />
+                    <p className="text-sm text-gray-300">
                       {modelFile ? modelFile.name : 'Click to upload model file'}
                     </p>
                     <p className="text-xs text-gray-500 mt-2">
@@ -191,13 +191,13 @@ export default function Creator() {
               {/* Pricing */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">
+                  <label className="block text-sm font-medium mb-2 text-gray-300">
                     Inference Price (SOL) *
                   </label>
                   <input
                     type="number"
                     step="0.001"
-                    className="input"
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all"
                     value={formData.inferencePrice}
                     onChange={(e) => setFormData({ ...formData, inferencePrice: e.target.value })}
                     required
@@ -205,13 +205,13 @@ export default function Creator() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">
+                  <label className="block text-sm font-medium mb-2 text-gray-300">
                     Download Price (SOL) *
                   </label>
                   <input
                     type="number"
                     step="0.01"
-                    className="input"
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all"
                     value={formData.downloadPrice}
                     onChange={(e) => setFormData({ ...formData, downloadPrice: e.target.value })}
                     required
@@ -222,11 +222,11 @@ export default function Creator() {
 
               {/* Storage Type */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className="block text-sm font-medium mb-2 text-gray-300">
                   Storage Provider
                 </label>
                 <select
-                  className="input"
+                  className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all"
                   value={formData.storageType}
                   onChange={(e) => setFormData({ ...formData, storageType: e.target.value })}
                 >
@@ -239,7 +239,7 @@ export default function Creator() {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn btn-primary w-full text-lg py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 text-lg font-medium bg-gradient-to-r from-cyan-500 to-rose-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
