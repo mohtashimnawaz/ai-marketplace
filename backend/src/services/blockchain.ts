@@ -149,12 +149,13 @@ export function parseMarketplaceAccount(data: Buffer): Marketplace | null {
 // Fetch functions
 export async function fetchAllModels(): Promise<Array<{ pubkey: string; data: Model }>> {
   try {
+    const discriminator = coder.accounts.accountDiscriminator('model');
     const accounts = await connection.getProgramAccounts(PROGRAM_ID, {
       filters: [
         {
           memcmp: {
             offset: 0,
-            bytes: coder.accounts.accountDiscriminator('model'),
+            bytes: Buffer.from(discriminator).toString('base64'),
           },
         },
       ],
@@ -186,12 +187,13 @@ export async function fetchModelByPubkey(pubkey: PublicKey): Promise<Model | nul
 
 export async function fetchModelsByCreator(creator: PublicKey): Promise<Array<{ pubkey: string; data: Model }>> {
   try {
+    const discriminator = coder.accounts.accountDiscriminator('model');
     const accounts = await connection.getProgramAccounts(PROGRAM_ID, {
       filters: [
         {
           memcmp: {
             offset: 0,
-            bytes: coder.accounts.accountDiscriminator('model'),
+            bytes: Buffer.from(discriminator).toString('base64'),
           },
         },
         {
@@ -231,12 +233,13 @@ export async function fetchAccessRecord(user: PublicKey, model: PublicKey): Prom
 
 export async function fetchUserAccessRecords(user: PublicKey): Promise<Array<{ pubkey: string; data: Access }>> {
   try {
+    const discriminator = coder.accounts.accountDiscriminator('access');
     const accounts = await connection.getProgramAccounts(PROGRAM_ID, {
       filters: [
         {
           memcmp: {
             offset: 0,
-            bytes: coder.accounts.accountDiscriminator('access'),
+            bytes: Buffer.from(discriminator).toString('base64'),
           },
         },
         {

@@ -116,20 +116,3 @@ router.post('/download/:modelId', async (req: Request, res: Response) => {
 });
 
 export default router;
-    const downloadUrl = await generateDownloadUrl(modelId, userPubkey, 3600); // 1 hour
-
-    res.json({
-      success: true,
-      downloadUrl,
-      expiresIn: 3600,
-    });
-  } catch (error: any) {
-    console.error('Error generating download URL:', error);
-    res.status(500).json({ 
-      error: 'Failed to generate download URL',
-      message: error.message 
-    });
-  }
-});
-
-export default router;
