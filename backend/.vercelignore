@@ -23,9 +23,13 @@ models/
 **/*.map
 **/*.d.ts.map
 
-# Large optional dependencies
-node_modules/onnxruntime-node
-node_modules/ipfs-http-client
-node_modules/@ipld
-node_modules/ipfs-core-types
-node_modules/ipfs-core-utils
+# Large optional dependencies - exclude from bundle
+**/node_modules/onnxruntime-node
+**/node_modules/ipfs-http-client
+**/node_modules/@ipld
+**/node_modules/ipfs-core-types
+**/node_modules/ipfs-core-utils
+**/node_modules/ipfs-unixfs
+**/node_modules/ipfs-core-config
+**/node_modules/libp2p
+**/node_modules/@libp2p
