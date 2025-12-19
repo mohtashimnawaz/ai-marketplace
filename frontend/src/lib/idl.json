@@ -1,8 +1,954 @@
 {
-  "version": "0.1.0",
-  "name": "ai_marketplace",
-  "instructions": [],
-  "accounts": [],
-  "types": [],
-  "errors": []
+  "address": "8g37Z8wZR9xMaHQRP8W8FzWqAj1A8VRt2c4t6LnBqAyb",
+  "metadata": {
+    "name": "ai_marketplace",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "initialize_marketplace",
+      "docs": [
+        "Initialize the marketplace"
+      ],
+      "discriminator": [
+        47,
+        81,
+        64,
+        0,
+        96,
+        56,
+        105,
+        7
+      ],
+      "accounts": [
+        {
+          "name": "marketplace",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  97,
+                  114,
+                  107,
+                  101,
+                  116,
+                  112,
+                  108,
+                  97,
+                  99,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury"
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "protocol_fee_bps",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "purchase_access",
+      "docs": [
+        "Purchase access to a model (for inference or download)"
+      ],
+      "discriminator": [
+        191,
+        249,
+        111,
+        210,
+        163,
+        248,
+        87,
+        242
+      ],
+      "accounts": [
+        {
+          "name": "access",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  101,
+                  115,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "model"
+              }
+            ]
+          }
+        },
+        {
+          "name": "model",
+          "writable": true
+        },
+        {
+          "name": "marketplace",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  97,
+                  114,
+                  107,
+                  101,
+                  116,
+                  112,
+                  108,
+                  97,
+                  99,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "creator",
+          "writable": true
+        },
+        {
+          "name": "treasury",
+          "writable": true
+        },
+        {
+          "name": "user_token_account",
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "creator_token_account",
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "treasury_token_account",
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "token_program",
+          "optional": true,
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "access_type",
+          "type": {
+            "defined": {
+              "name": "AccessType"
+            }
+          }
+        },
+        {
+          "name": "duration_days",
+          "type": {
+            "option": "u32"
+          }
+        }
+      ]
+    },
+    {
+      "name": "record_download",
+      "docs": [
+        "Record a model download"
+      ],
+      "discriminator": [
+        24,
+        136,
+        98,
+        27,
+        75,
+        101,
+        197,
+        76
+      ],
+      "accounts": [
+        {
+          "name": "access",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  101,
+                  115,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "model"
+              }
+            ]
+          }
+        },
+        {
+          "name": "model",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "record_inference",
+      "docs": [
+        "Record an inference execution"
+      ],
+      "discriminator": [
+        78,
+        248,
+        164,
+        52,
+        223,
+        207,
+        215,
+        252
+      ],
+      "accounts": [
+        {
+          "name": "usage",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  97,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "model"
+              },
+              {
+                "kind": "arg",
+                "path": "inference_hash"
+              }
+            ]
+          }
+        },
+        {
+          "name": "access",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  101,
+                  115,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "model"
+              }
+            ]
+          }
+        },
+        {
+          "name": "model",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "inference_hash",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "register_model",
+      "docs": [
+        "Register a new AI model"
+      ],
+      "discriminator": [
+        111,
+        236,
+        93,
+        31,
+        195,
+        210,
+        142,
+        125
+      ],
+      "accounts": [
+        {
+          "name": "model",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  111,
+                  100,
+                  101,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "account",
+                "path": "marketplace.total_models",
+                "account": "Marketplace"
+              }
+            ]
+          }
+        },
+        {
+          "name": "marketplace",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  97,
+                  114,
+                  107,
+                  101,
+                  116,
+                  112,
+                  108,
+                  97,
+                  99,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "model_hash",
+          "type": "string"
+        },
+        {
+          "name": "storage_uri",
+          "type": "string"
+        },
+        {
+          "name": "model_size",
+          "type": "u64"
+        },
+        {
+          "name": "inference_price",
+          "type": "u64"
+        },
+        {
+          "name": "download_price",
+          "type": "u64"
+        },
+        {
+          "name": "payment_token",
+          "type": {
+            "defined": {
+              "name": "PaymentToken"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_model_pricing",
+      "docs": [
+        "Update model pricing"
+      ],
+      "discriminator": [
+        112,
+        202,
+        130,
+        250,
+        160,
+        61,
+        253,
+        112
+      ],
+      "accounts": [
+        {
+          "name": "model",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  111,
+                  100,
+                  101,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "account",
+                "path": "model.model_id",
+                "account": "Model"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator",
+          "signer": true,
+          "relations": [
+            "model"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "inference_price",
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "download_price",
+          "type": {
+            "option": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_model_status",
+      "docs": [
+        "Update model status"
+      ],
+      "discriminator": [
+        234,
+        110,
+        41,
+        94,
+        236,
+        250,
+        247,
+        185
+      ],
+      "accounts": [
+        {
+          "name": "model",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  111,
+                  100,
+                  101,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "account",
+                "path": "model.model_id",
+                "account": "Model"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator",
+          "signer": true,
+          "relations": [
+            "model"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "is_active",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "withdraw_earnings",
+      "docs": [
+        "Withdraw creator earnings"
+      ],
+      "discriminator": [
+        6,
+        132,
+        233,
+        254,
+        241,
+        87,
+        247,
+        185
+      ],
+      "accounts": [
+        {
+          "name": "model",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  111,
+                  100,
+                  101,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "account",
+                "path": "model.model_id",
+                "account": "Model"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "model"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Access",
+      "discriminator": [
+        117,
+        154,
+        108,
+        210,
+        202,
+        83,
+        96,
+        222
+      ]
+    },
+    {
+      "name": "Marketplace",
+      "discriminator": [
+        70,
+        222,
+        41,
+        62,
+        78,
+        3,
+        32,
+        174
+      ]
+    },
+    {
+      "name": "Model",
+      "discriminator": [
+        152,
+        221,
+        247,
+        122,
+        185,
+        125,
+        223,
+        151
+      ]
+    },
+    {
+      "name": "Usage",
+      "discriminator": [
+        152,
+        162,
+        178,
+        106,
+        43,
+        208,
+        237,
+        89
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NameTooLong",
+      "msg": "Model name is too long (max 100 characters)"
+    },
+    {
+      "code": 6001,
+      "name": "DescriptionTooLong",
+      "msg": "Description is too long (max 500 characters)"
+    },
+    {
+      "code": 6002,
+      "name": "HashTooLong",
+      "msg": "Hash is too long (max 64 characters)"
+    },
+    {
+      "code": 6003,
+      "name": "UriTooLong",
+      "msg": "URI is too long (max 200 characters)"
+    },
+    {
+      "code": 6004,
+      "name": "ModelInactive",
+      "msg": "Model is not active"
+    },
+    {
+      "code": 6005,
+      "name": "AccessExpired",
+      "msg": "Access has expired"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidAccessType",
+      "msg": "Invalid access type for this operation"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidDuration",
+      "msg": "Invalid duration for subscription"
+    }
+  ],
+  "types": [
+    {
+      "name": "Access",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "model",
+            "type": "pubkey"
+          },
+          {
+            "name": "access_type",
+            "type": {
+              "defined": {
+                "name": "AccessType"
+              }
+            }
+          },
+          {
+            "name": "purchased_at",
+            "type": "i64"
+          },
+          {
+            "name": "expires_at",
+            "type": {
+              "option": "i64"
+            }
+          },
+          {
+            "name": "inference_count",
+            "type": "u64"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AccessType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Inference"
+          },
+          {
+            "name": "Download"
+          },
+          {
+            "name": "Subscription"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Marketplace",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury",
+            "type": "pubkey"
+          },
+          {
+            "name": "protocol_fee_bps",
+            "type": "u64"
+          },
+          {
+            "name": "total_models",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Model",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "model_hash",
+            "type": "string"
+          },
+          {
+            "name": "storage_uri",
+            "type": "string"
+          },
+          {
+            "name": "model_size",
+            "type": "u64"
+          },
+          {
+            "name": "inference_price",
+            "type": "u64"
+          },
+          {
+            "name": "download_price",
+            "type": "u64"
+          },
+          {
+            "name": "payment_token",
+            "type": {
+              "defined": {
+                "name": "PaymentToken"
+              }
+            }
+          },
+          {
+            "name": "total_inferences",
+            "type": "u64"
+          },
+          {
+            "name": "total_downloads",
+            "type": "u64"
+          },
+          {
+            "name": "total_revenue",
+            "type": "u64"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "model_id",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PaymentToken",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Sol"
+          },
+          {
+            "name": "SplToken"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Usage",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "model",
+            "type": "pubkey"
+          },
+          {
+            "name": "inference_hash",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
 }
