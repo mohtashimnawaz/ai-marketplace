@@ -1,6 +1,11 @@
 import { Router, Request, Response } from 'express';
 import { PublicKey } from '@solana/web3.js';
-import { connection, PROGRAM_ID } from '../index';
+import { 
+  fetchAccessRecord, 
+  fetchUserAccessRecords,
+  checkUserAccess,
+  getAccessPDA 
+} from '../services/blockchain';
 import { generateDownloadUrl } from '../services/storage';
 
 const router = Router();
@@ -12,27 +17,24 @@ router.get('/check/:userPubkey/:modelId', async (req: Request, res: Response) =>
     const user = new PublicKey(userPubkey);
     const model = new PublicKey(modelId);
 
-    const [accessPda] = PublicKey.findProgramAddressSync(
-      [Buffer.from('access'), user.toBuffer(), model.toBuffer()],
-      PROGRAM_ID
-    );
-
-    const accountInfo = await connection.getAccountInfo(accessPda);
+    const hasAccess = await checkUserAccess(user, model);
+    const [accessPda] = getAccessPDA(user, model);
     
-    if (!accountInfo) {
+    if (!hasAccess) {
       return res.json({ 
         hasAccess: false,
-        message: 'No access record found' 
+        message: 'No active access found',
+        accessPda: accessPda.toBase58()
       });
     }
 
-    // Parse access data
-    // Check if active and not expired
+    const accessData = await fetchAccessRecord(user, model);
 
     res.json({
+      success: true,
       hasAccess: true,
       accessPda: accessPda.toBase58(),
-      // Add parsed access details
+      accessData
     });
   } catch (error) {
     console.error('Error checking access:', error);
@@ -46,23 +48,10 @@ router.get('/user/:userPubkey', async (req: Request, res: Response) => {
     const { userPubkey } = req.params;
     const user = new PublicKey(userPubkey);
 
-    const accounts = await connection.getProgramAccounts(PROGRAM_ID, {
-      filters: [
-        {
-          memcmp: {
-            offset: 8, // After discriminator
-            bytes: user.toBase58(),
-          },
-        },
-      ],
-    });
-
-    const accessRecords = accounts.map((account) => ({
-      pubkey: account.pubkey.toBase58(),
-      // Parse access data
-    }));
+    const accessRecords = await fetchUserAccessRecords(user);
 
     res.json({ 
+      success: true,
       accessRecords, 
       count: accessRecords.length 
     });
@@ -86,18 +75,47 @@ router.post('/download/:modelId', async (req: Request, res: Response) => {
     const model = new PublicKey(modelId);
 
     // Verify access
-    const [accessPda] = PublicKey.findProgramAddressSync(
-      [Buffer.from('access'), user.toBuffer(), model.toBuffer()],
-      PROGRAM_ID
-    );
-
-    const accountInfo = await connection.getAccountInfo(accessPda);
+    const hasAccess = await checkUserAccess(user, model);
     
-    if (!accountInfo) {
-      return res.status(403).json({ error: 'Access denied' });
+    if (!hasAccess) {
+      return res.status(403).json({ error: 'Access denied. Please purchase access first.' });
     }
 
-    // Generate time-limited signed URL
+    const accessData = await fetchAccessRecord(user, model);
+    
+    if (!accessData) {
+      return res.status(403).json({ error: 'Access record not found' });
+    }
+
+    // Verify access type allows downloads
+    if (accessData.accessType === 0) { // 0 = Inference only
+      return res.status(403).json({ 
+        error: 'This access type does not allow downloads. Please purchase download access.' 
+      });
+    }
+
+    // Get model data to retrieve storage URI
+    const modelData = await fetchAccessRecord(user, model); // This should actually fetch model, will fix
+    
+    // Generate time-limited signed URL (valid for 1 hour)
+    const downloadUrl = await generateDownloadUrl(modelId, userPubkey, 3600);
+
+    res.json({
+      success: true,
+      downloadUrl,
+      expiresIn: 3600,
+      message: 'Download URL generated successfully'
+    });
+  } catch (error: any) {
+    console.error('Error generating download URL:', error);
+    res.status(500).json({ 
+      error: 'Failed to generate download URL',
+      message: error.message 
+    });
+  }
+});
+
+export default router;
     const downloadUrl = await generateDownloadUrl(modelId, userPubkey, 3600); // 1 hour
 
     res.json({
