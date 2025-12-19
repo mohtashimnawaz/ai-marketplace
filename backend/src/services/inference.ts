@@ -47,7 +47,7 @@ export async function runInference(
     }
 
     // Prepare input tensors
-    const feeds: Record<string, ort.Tensor> = {};
+    const feeds: Record<string, any> = {};
     
     // Example: Convert input data to tensors
     // This needs to be adapted based on your model's input requirements
@@ -63,7 +63,7 @@ export async function runInference(
     // Convert output tensors to JSON-serializable format
     const output: Record<string, any> = {};
     for (const [key, tensor] of Object.entries(results)) {
-      const typedTensor = tensor as ort.Tensor;
+      const typedTensor = tensor as any;
       output[key] = {
         data: Array.from(typedTensor.data as Float32Array | Int32Array | Uint8Array),
         dims: typedTensor.dims,
@@ -78,8 +78,11 @@ export async function runInference(
   }
 }
 
-export async function loadModel(modelPath: string): Promise<ort.InferenceSession> {
+export async function loadModel(modelPath: string): Promise<any> {
   try {
+    if (!ort) {
+      throw new Error('onnxruntime-node not available');
+    }
     const session = await ort.InferenceSession.create(modelPath);
     return session;
   } catch (error) {
