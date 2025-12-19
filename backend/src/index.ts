@@ -54,10 +54,13 @@ app.use((err: any, req: Request, res: Response, next: any) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`🚀 AI Marketplace Backend running on port ${port}`);
-  console.log(`📡 Connected to Solana: ${process.env.SOLANA_RPC_URL}`);
-  console.log(`🔗 Program ID: ${PROGRAM_ID.toBase58()}`);
-});
+// Only start server in non-Vercel environments
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`🚀 AI Marketplace Backend running on port ${port}`);
+    console.log(`📡 Connected to Solana: ${process.env.SOLANA_RPC_URL}`);
+    console.log(`🔗 Program ID: ${PROGRAM_ID.toBase58()}`);
+  });
+}
 
 export default app;
