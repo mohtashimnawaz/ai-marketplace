@@ -1,7 +1,7 @@
 import { Connection, PublicKey, AccountInfo } from '@solana/web3.js';
 import { connection, PROGRAM_ID } from '../index';
 import { BorshCoder, Idl } from '@coral-xyz/anchor';
-import idl from '../../../target/idl/ai_marketplace.json';
+import idl from '../idl/ai_marketplace.json';
 
 const coder = new BorshCoder(idl as Idl);
 

@@ -1,15 +1,33 @@
-import * as ort from 'onnxruntime-node';
+// Optional dependency - only load if available
+let ort: any;
+try {
+  ort = require('onnxruntime-node');
+} catch (err) {
+  console.warn('onnxruntime-node not available. Inference will use mock mode.');
+  ort = null;
+}
+
 import fs from 'fs';
 import path from 'path';
 
 // Model cache to avoid reloading
-const modelCache = new Map<string, ort.InferenceSession>();
+const modelCache = new Map<string, any>();
 
 export async function runInference(
   modelId: string,
   inputs: any
 ): Promise<any> {
   try {
+    // Check if ONNX runtime is available
+    if (!ort) {
+      console.log('Running inference in mock mode (onnxruntime-node not installed)');
+      return {
+        outputs: [[0.5, 0.3, 0.2]], // Mock output
+        mode: 'mock',
+        message: 'Install onnxruntime-node for real inference'
+      };
+    }
+
     // Check if model is in cache
     let session = modelCache.get(modelId);
 

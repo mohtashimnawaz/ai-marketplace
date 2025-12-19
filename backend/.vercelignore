@@ -1,0 +1,31 @@
+# Vercel deployment optimization
+node_modules
+.next
+dist
+*.log
+.env
+.env.local
+.DS_Store
+
+# Test files
+**/*.test.ts
+**/*.spec.ts
+test-integration.js
+start-and-test.sh
+
+# Models directory (user uploads)
+models/
+
+# Build artifacts
+*.tsbuildinfo
+
+# Source maps (reduces bundle size)
+**/*.map
+**/*.d.ts.map
+
+# Large optional dependencies
+node_modules/onnxruntime-node
+node_modules/ipfs-http-client
+node_modules/@ipld
+node_modules/ipfs-core-types
+node_modules/ipfs-core-utils
