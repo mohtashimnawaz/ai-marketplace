@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "installCommand": "npm install --production --no-optional",
   "rewrites": [
     {
       "source": "/(.*)",
@@ -8,8 +9,7 @@
   ],
   "functions": {
     "api/index.ts": {
-      "maxDuration": 30,
-      "excludeFiles": "{node_modules/onnxruntime-node/**,node_modules/ipfs-http-client/**,node_modules/@ipld/**,node_modules/ipfs-core-types/**,node_modules/ipfs-core-utils/**,node_modules/ipfs-unixfs/**,node_modules/libp2p/**,node_modules/@libp2p/**}"
+      "maxDuration": 30
     }
   }
 }
